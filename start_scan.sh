@@ -122,7 +122,7 @@ from typing import Dict, Any, Optional, Tuple
 
 
 class CodeAntAnalyzer:
-    def __init__(self, base_url: str = "https://xn4ei5o4nbichp7gjfqzr4ueli0xtezg.lambda-url.ap-south-1.on.aws",
+    def __init__(self, base_url: str = "https://api.codeant.ai",
                  service: str = "github", custom_service_url: str = ""):
         self.base_url = base_url
         self.start_scan_url = f"{base_url}/api/analysis/start"
