@@ -194,6 +194,8 @@ start_scan() {
       log "Scan ID: $scan_id"
       echo "$scan_id" > scan_id.txt
     fi
+  elif [[ "$status_code" == "504" ]]; then
+    echo "✅  Quality gate scan queued"
   else
     echo "❌  Quality gate scan failed (HTTP $status_code):"
     echo "$response_body"
