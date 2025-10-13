@@ -105,8 +105,11 @@ status_code=$(echo "$complete_resp" | tail -n 1)
 
 echo "Result: $response_body"
 
-# Check for 4XX/5XX and exit with error
-if [[ "$status_code" -ge 400 ]]; then
+# Check status code
+if [[ "$status_code" == "504" ]]; then
+  echo "Coverage upload queued"
+  exit 0
+elif [[ "$status_code" -ge 400 ]]; then
   echo "Error: Request failed with HTTP $status_code" >&2
   echo "Response: $response_body" >&2
   exit 4

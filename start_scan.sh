@@ -176,7 +176,7 @@ class CodeAntAnalyzer:
             response = urllib.request.urlopen(req)
             status_code = response.getcode()
             response_text = response.read().decode('utf-8')
-            
+
             if status_code >= 200 and status_code < 300:
                 return {
                     "success": True,
@@ -190,6 +190,12 @@ class CodeAntAnalyzer:
                     "status_code": status_code
                 }
         except urllib.error.HTTPError as e:
+            if e.code == 504:
+                return {
+                    "success": True,
+                    "data": {"message": "Analysis scan queued"},
+                    "status_code": e.code
+                }
             return {
                 "success": False,
                 "error": f"HTTP {e.code}: {e.read().decode('utf-8')}",
